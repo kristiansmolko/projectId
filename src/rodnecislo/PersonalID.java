@@ -20,6 +20,8 @@ public class PersonalID {
             return false;
         if (id.charAt(2) != '0' && id.charAt(2) != '1' && id.charAt(2) != '5' && id.charAt(2) != '6')
             return false;
+        if ((id.charAt(2) == '0' && id.charAt(3) < 0) || (id.charAt(2) == '1' && id.charAt(3) > 2))
+            return false;
 
         if (cDigits == 9)
             id = id + '0';
@@ -43,15 +45,29 @@ public class PersonalID {
             year -= 100;
         }
 
+        if (((id.charAt(2) == '0' && id.charAt(3) == '2') || (id.charAt(2) == '5' && id.charAt(3) == '2')) && year % 4 != 0)
+            if (day > 28)
+                return false;
+        if (id.charAt(2) == '0' || id.charAt(2) == '5')
+            switch (id.charAt(3)){
+                case '1', '3', '5', '7', '8': if (day > 31) return false; break;
+                case '2', '4', '6', '9': if (day > 30) return false;
+            }
+        else if (id.charAt(2) == '1' || id.charAt(2) == '6')
+            switch (id.charAt(3)){
+                case '0', '2': if (day > 31) return false; break;
+                case '1': if (day > 30) return false;
+            }
+
 
         System.out.println(day + "-" + month + "-" + year);
-
 
         return true;
     }
 
     public static void main(String[] args) {
         PersonalID person = new PersonalID();
-        System.out.println(person.checkID("976231/1240"));
+        System.out.println(person.checkID("970531/1242"));
+        //975228/1242 975229/1241
     }
 }
