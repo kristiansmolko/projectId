@@ -45,4 +45,22 @@ public class Task {
     public boolean isThisTrue(){
         return true;
     }
+
+    public double terminovanyVklad(int value, int year, double interest, boolean DPH){
+        double newValue = value;
+        if (year <= 0 || interest <= 0 || value <= 0)
+            return 0;
+        if (!DPH){
+            for (int i = 0; i < year; i++)
+                newValue = newValue + (newValue/interest);
+        }
+        else {
+            for (int i = 0; i < year; i++){
+                double add = (newValue/interest)*0.8;
+                newValue = newValue + add;
+            }
+        }
+
+        return Math.round(newValue*100) / 100.0;
+    }
 }

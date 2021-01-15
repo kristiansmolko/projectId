@@ -70,4 +70,15 @@ class TaskTest {
         assertTrue(task.isThisTrue());
     }
 
+    @Test
+    void terminovanyVklad(){
+        Task task = new Task();
+        assertEquals(1100, task.terminovanyVklad(1000, 1, 10, false));
+        assertEquals(1080, task.terminovanyVklad(1000, 1, 10, true));
+        assertEquals(1259.71, task.terminovanyVklad(1000, 3, 10, true));
+        assertEquals(1331, task.terminovanyVklad(1000, 3, 10, false));
+        assertEquals(0, task.terminovanyVklad(2000, 0, 10, false));
+        assertEquals(0, task.terminovanyVklad(100, 10, 0, true));
+    }
+
 }
