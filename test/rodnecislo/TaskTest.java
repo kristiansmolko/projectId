@@ -77,8 +77,25 @@ class TaskTest {
         assertEquals(1080, task.terminovanyVklad(1000, 1, 10, true));
         assertEquals(1259.71, task.terminovanyVklad(1000, 3, 10, true));
         assertEquals(1331, task.terminovanyVklad(1000, 3, 10, false));
-        assertEquals(0, task.terminovanyVklad(2000, 0, 10, false));
-        assertEquals(0, task.terminovanyVklad(100, 10, 0, true));
+        assertEquals(2000, task.terminovanyVklad(2000, 0, 10, false));
+        assertEquals(100, task.terminovanyVklad(100, 10, 0, true));
+        assertEquals(0, task.terminovanyVklad(100, -10, 10, true));
+        assertEquals(0, task.terminovanyVklad(-100, 10, 20, true));
+        assertEquals(100, task.terminovanyVklad(100, 10, -0, true));
+        assertEquals(1500, task.terminovanyVklad(500, 1, 250, true));
+    }
+
+    @Test
+    void priceForTransport(){
+        Task task = new Task();
+        assertEquals(30.94, task.priceForTransport(450, 5.5, 1.25));
+        assertEquals(40.63, task.priceForTransport(500, 6.5, 1.25));
+        assertEquals(7.35, task.priceForTransport(100, 4.9, 1.50));
+        assertEquals(31.12, task.priceForTransport(540, 5.1, 1.13));
+        assertEquals(1.51, task.priceForTransport(20, 7.7, 0.98));
+        assertEquals(0, task.priceForTransport(-20, 5.5, 1.25));
+        assertEquals(0, task.priceForTransport(450, -10, 1.25));
+        assertEquals(0, task.priceForTransport(450, 5.5, -20));
     }
 
 }

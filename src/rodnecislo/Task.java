@@ -49,18 +49,28 @@ public class Task {
     public double terminovanyVklad(int value, int year, double interest, boolean DPH){
         double newValue = value;
         if (year <= 0 || interest <= 0 || value <= 0)
-            return 0;
+            if (interest == 0 || year == 0)
+                return value;
+            else
+                return 0;
         if (!DPH){
             for (int i = 0; i < year; i++)
-                newValue = newValue + (newValue/interest);
+                newValue = newValue + (newValue/100 * interest);
         }
         else {
             for (int i = 0; i < year; i++){
-                double add = (newValue/interest)*0.8;
-                newValue = newValue + add;
+                newValue = newValue + (newValue/100 * interest)*0.8;
             }
         }
 
         return Math.round(newValue*100) / 100.0;
+    }
+
+    public double priceForTransport(int distance, double consumption, double petrolPrice){
+        if (consumption < 0 || petrolPrice <= 0 || distance <= 0)
+            return 0;
+        double price = (distance/100.0) * consumption * petrolPrice;
+
+        return Math.round(price*100)/100.0;
     }
 }
