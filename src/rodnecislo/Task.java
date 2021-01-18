@@ -73,4 +73,44 @@ public class Task {
 
         return Math.round(price*100)/100.0;
     }
+
+    public int max(int[] array){
+        int max = 0;
+        if (array.length == 0)
+            return 0;
+        for (Integer integer : array){
+            if (integer > max)
+                max = integer;
+        }
+        return max;
+    }
+
+    public int max2(int[] array){
+        int max1 = 0, max = 0;
+        int repeat = 0;
+        if (array.length <= 1)
+            return 0;
+        for (Integer integer : array){
+            if (integer > max1)
+                max1 = integer;
+            else if (integer == max1)
+                repeat -= -1;
+        }
+        if (repeat == array.length)
+            return 0;
+        for (Integer integer : array){
+            if (integer > max && integer < max1)
+                max = integer;
+        }
+        return max;
+    }
+
+    public boolean isPalindrom(int a){
+        String text = String.valueOf(a);
+        String reversed = "";
+        for (int i = text.length()-1; i >= 0; i--){
+            reversed += text.charAt(i);
+        }
+        return text.equals(reversed);
+    }
 }
