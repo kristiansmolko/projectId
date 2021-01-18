@@ -98,4 +98,36 @@ class TaskTest {
         assertEquals(0, task.priceForTransport(450, 5.5, -20));
     }
 
+    @Test
+    void max(){
+        Task task = new Task();
+        assertEquals(3, task.max(new int[]{0,1,2,3}));
+        assertEquals(10, task.max(new int[]{10}));
+        assertEquals(0, task.max(new int[]{}));
+        assertEquals(9, task.max(new int[]{0,1,2,3,4,5,6,7,8,9}));
+        assertEquals(3000, task.max(new int[]{0,100,-5,60,-52,3000}));
+    }
+
+    @Test
+    void max2(){
+        Task task = new Task();
+        assertEquals(2, task.max2(new int[] {0,1,2,3}));
+        assertEquals(1, task.max2(new int[] {3,3,3,3,3,3,1}));
+        assertEquals(20, task.max2(new int[] {20,0,-5,6,10,60,19}));
+        assertEquals(0, task.max2(new int[] {50}));
+        assertEquals(0, task.max2(new int[] {}));
+    }
+
+    @Test
+    void isPalindrom(){
+        Task task = new Task();
+        assertTrue(task.isPalindrom(121));
+        assertTrue(task.isPalindrom(1001));
+        assertTrue(task.isPalindrom(123321));
+        assertTrue(task.isPalindrom(1));
+        assertFalse(task.isPalindrom(12));
+        assertFalse(task.isPalindrom(100));
+        assertFalse(task.isPalindrom(1235));
+    }
+
 }
