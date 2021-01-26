@@ -34,11 +34,11 @@ public class JsonRead {
             long humidity = (long) tempIn.get("humidity");
             System.out.println("Humidity: " + humidity + "%");
             JSONObject sys = (JSONObject) object.get("sys");
-            long sunrise = (long) sys.get("sunrise");
-            long sunset = (long) sys.get("sunset");
-            /*DateFormat sun = new SimpleDateFormat("HH:mm");
+            long sunrise = (long) sys.get("sunrise")*1000;
+            long sunset = (long) sys.get("sunset")*1000;
+            DateFormat sun = new SimpleDateFormat("HH:mm");
             System.out.println("Sunrise at " + sun.format(new Date(sunrise)));
-            System.out.println("Sunset at " + sun.format(new Date(sunset)));*/
+            System.out.println("Sunset at " + sun.format(new Date(sunset)));
         } catch (IOException | ParseException e) {e.printStackTrace();
         }
 
