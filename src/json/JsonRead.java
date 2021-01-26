@@ -17,30 +17,31 @@ public class JsonRead {
     public static void main(String[] args) {
         JSONParser parser = new JSONParser();
         try{
+            //init reader
             Reader reader = new FileReader("resource/test.json");
+            //parse our json
             JSONObject object = (JSONObject) parser.parse(reader);
-
-            /*Iterator<String> iterator = msg.iterator();
-            while (iterator.hasNext())
-                System.out.println(iterator.next());*/
-
+            //main has another object
             JSONObject tempIn = (JSONObject) object.get("main");
+            //object in object main
             double temperature = (double) tempIn.get("temp");
             System.out.println("Actual temperature: " + (Math.round((temperature - 273.15) * 100)/100.0) + "°C");
             long pressure = (long) tempIn.get("pressure");
             System.out.println("Pressure: " + Math.round(pressure*100)/100.0 + "hPa");
+            //not in main
             long visibility = (long) object.get("visibility");
             System.out.println("Visibility: " + visibility + "m");
             long humidity = (long) tempIn.get("humidity");
             System.out.println("Humidity: " + humidity + "%");
+            //system object
             JSONObject sys = (JSONObject) object.get("sys");
             long sunrise = (long) sys.get("sunrise")*1000;
             long sunset = (long) sys.get("sunset")*1000;
             DateFormat sun = new SimpleDateFormat("HH:mm");
             System.out.println("Sunrise at " + sun.format(new Date(sunrise)));
             System.out.println("Sunset at " + sun.format(new Date(sunset)));
-        } catch (IOException | ParseException e) {e.printStackTrace();
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
         }
-
     }
 }
